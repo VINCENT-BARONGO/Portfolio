@@ -155,7 +155,7 @@
             cursor: pointer;
         }
         
-        /* Hero Section */
+        /* Hero Section - FIXED HEADER COLOR */
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
             color: white;
@@ -170,8 +170,16 @@
         
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: white;
+        }
+        
+        /* FIX: Added specific styling for the subtitle */
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #3498db; /* Using your secondary color for contrast */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .hero p {
@@ -224,14 +232,6 @@
             object-fit: cover;
             border: 5px solid var(--secondary-color);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .photo-instruction {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid var(--secondary-color);
         }
         
         /* Skills Section */
@@ -565,6 +565,10 @@
                 font-size: 2.5rem;
             }
             
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -628,9 +632,9 @@
                 </div>
                 <div class="about-image">
                     <div class="photo-placeholder">
+                        <!-- Your original photo logic restored -->
                         <img src="IMG_0052.jpg" alt="Vincent Barongo" class="profile-photo">
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -864,7 +868,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Vincent Barongo. All rights reserved.</p>
+                <p>&copy; 2025 Vincent Barongo. All rights reserved.</p>
             </div>
         </div>
     </footer>
