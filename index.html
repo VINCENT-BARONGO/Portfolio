@@ -92,7 +92,6 @@
             letter-spacing: 1px;
             transition: all 0.3s;
         }
-
         
         .btn:hover {
             background-color: var(--primary-color);
@@ -171,8 +170,15 @@
         
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: white;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .hero p {
@@ -566,6 +572,10 @@
                 font-size: 2.5rem;
             }
             
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -607,7 +617,7 @@
     <section id="home" class="hero">
         <div class="container hero-content">
             <h1>Vincent Barongo</h1>
-            <h2>IT Specialist & Software Developer</h2>
+            <h2>Software Developer & IT Specialist</h2>
             <p>Creating secure, efficient solutions through a unique blend of networking expertise and software development skills</p>
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -629,9 +639,13 @@
                 </div>
                 <div class="about-image">
                     <div class="photo-placeholder">
-                        <img src="IMG_0052.jpg" alt="Vincent Barongo" class="profile-photo">
+                        <div class="profile-photo" style="background-color: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                            <span>Your Photo Here</span>
+                        </div>
                     </div>
-                    
+                    <div class="photo-instruction">
+                        <p><strong>Note:</strong> Replace this placeholder with your actual photo by updating the IMG_0052.jpg file or changing the src attribute in the img tag.</p>
+                    </div>
                 </div>
             </div>
         </div>
