@@ -28,6 +28,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: #f9f9f9;
+            overflow-x: hidden;
         }
         
         .container {
@@ -96,6 +97,8 @@
         .btn:hover {
             background-color: var(--primary-color);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .section-title {
@@ -155,30 +158,47 @@
             cursor: pointer;
         }
         
-        /* Hero Section - FIXED HEADER COLOR */
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
             color: white;
             padding: 150px 0 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(231, 76, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(46, 204, 113, 0.1) 0%, transparent 50%);
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 10px;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        /* FIX: Added specific styling for the subtitle */
         .hero h2 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #3498db; /* Using your secondary color for contrast */
+            color: #3498db;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         
@@ -231,7 +251,60 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--secondary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Value Proposition Section */
+        .value-proposition {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .value-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
         
         /* Skills Section */
@@ -279,6 +352,7 @@
             position: absolute;
             left: 0;
             color: var(--secondary-color);
+            font-weight: bold;
         }
         
         /* Experience Section */
@@ -292,11 +366,12 @@
             content: '';
             position: absolute;
             width: 6px;
-            background-color: var(--secondary-color);
+            background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -3px;
+            border-radius: 3px;
         }
         
         .timeline-item {
@@ -304,6 +379,14 @@
             position: relative;
             width: 50%;
             box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .timeline-item:nth-child(odd) {
@@ -315,17 +398,24 @@
         }
         
         .timeline-content {
-            padding: 20px;
+            padding: 25px;
             background-color: white;
             position: relative;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--secondary-color);
         }
         
         .timeline-date {
             font-weight: bold;
             color: var(--secondary-color);
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-date i {
+            margin-right: 8px;
         }
         
         .timeline-item::after {
@@ -338,6 +428,7 @@
             border-radius: 50%;
             top: 15px;
             z-index: 1;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
         }
         
         .timeline-item:nth-child(odd)::after {
@@ -357,47 +448,73 @@
         
         .project-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
         
         .project-image {
             height: 200px;
-            background-color: #ddd;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image i {
+            font-size: 4rem;
+            z-index: 1;
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
         }
         
         .project-content {
-            padding: 20px;
+            padding: 25px;
         }
         
         .project-content h3 {
             color: var(--secondary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 20px;
         }
         
         .project-tag {
             background-color: var(--light-color);
             color: var(--primary-color);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
+            font-weight: 500;
         }
         
         /* Contact Section */
@@ -410,50 +527,68 @@
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--secondary-color);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
         
         .contact-form {
             background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
         }
         
         .form-control {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
             font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
         }
         
         textarea.form-control {
@@ -463,9 +598,9 @@
         
         /* Footer */
         footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a2530 100%);
             color: white;
-            padding: 50px 0 20px;
+            padding: 60px 0 20px;
             text-align: center;
         }
         
@@ -482,31 +617,44 @@
         }
         
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         
         .social-link:hover {
             background-color: var(--secondary-color);
+            transform: translateY(-5px);
         }
         
         .copyright {
-            margin-top: 30px;
+            margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Floating Tech Elements */
+        .floating-tech {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.1;
+            font-size: 2rem;
+            color: var(--secondary-color);
         }
         
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
+                text-align: center;
             }
             
             .timeline::after {
@@ -531,6 +679,10 @@
             .timeline-item:nth-child(even)::after {
                 left: 18px;
             }
+            
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -544,8 +696,9 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background-color: var(--primary-color);
+                background-color: rgba(44, 62, 80, 0.98);
                 transition: left 0.3s;
+                backdrop-filter: blur(10px);
             }
             
             nav.active {
@@ -554,11 +707,11 @@
             
             nav ul {
                 flex-direction: column;
-                padding: 30px;
+                padding: 40px;
             }
             
             nav ul li {
-                margin: 15px 0;
+                margin: 20px 0;
             }
             
             .hero h1 {
@@ -572,6 +725,7 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
             .contact-container {
@@ -582,10 +736,38 @@
                 width: 250px;
                 height: 250px;
             }
+            
+            .value-card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Tech Elements -->
+    <div class="floating-tech" style="top: 20%; left: 5%;"><i class="fas fa-code"></i></div>
+    <div class="floating-tech" style="top: 60%; right: 10%;"><i class="fas fa-network-wired"></i></div>
+    <div class="floating-tech" style="top: 40%; left: 10%;"><i class="fas fa-server"></i></div>
+    <div class="floating-tech" style="top: 80%; right: 15%;"><i class="fas fa-database"></i></div>
+    
     <!-- Header -->
     <header>
         <div class="container header-container">
@@ -611,10 +793,11 @@
         <div class="container hero-content">
             <h1>Vincent Barongo</h1>
             <h2>IT Specialist & Software Developer</h2>
-            <p>Creating secure, efficient solutions through a unique blend of networking expertise and software development skills</p>
+            <p>Bridging infrastructure expertise with modern software development to build secure, scalable, and efficient digital solutions</p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
@@ -625,14 +808,49 @@
             <h2>About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I am a highly motivated Software Developer and IT Specialist with a strong background in networking, systems administration, and software development. With proven experience at Globenet Technologies Ltd and various freelance projects, I bring expertise in network design, system security, application development, and end-user support.</p>
-                    <p>My unique value proposition lies in the combination of hands-on IT support (firewalls, IP phones, servers, fiber splicing, Starlink) and software development (mobile, web, database systems). I thrive in problem-solving environments and am passionate about building secure, efficient solutions that meet business needs.</p>
-                    <p>I recently graduated with a Bachelor of Technology in Computer Technology from The Technical University of Kenya, where I specialized in Computer Networks, System Security, Database Systems, and Software Engineering.</p>
-                    <a href="#contact" class="btn">Contact Me</a>
+                    <p>I am a versatile technology professional with a unique combination of networking infrastructure expertise and full-stack software development skills. My background spans from configuring enterprise networks and security systems to developing modern web and mobile applications.</p>
+                    <p>With hands-on experience at Globenet Technologies and successful freelance projects, I've developed a comprehensive understanding of both the hardware and software layers of technology solutions. This dual perspective enables me to design and implement systems that are not only functionally robust but also infrastructure-aware.</p>
+                    <p>I hold a Bachelor of Technology in Computer Technology from The Technical University of Kenya, with specialized knowledge in Computer Networks, System Security, Database Systems, and Software Engineering.</p>
+                    
+                    <div class="value-proposition">
+                        <h3 style="text-align: center; color: var(--secondary-color); margin-bottom: 30px;">My Value Proposition</h3>
+                        <div class="value-grid">
+                            <div class="value-card">
+                                <div class="value-icon">
+                                    <i class="fas fa-bridge"></i>
+                                </div>
+                                <h3>Infrastructure & Development Bridge</h3>
+                                <p>Unique ability to understand both network infrastructure and software development, enabling holistic solution design</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3>Security-First Approach</h3>
+                                <p>Network security background applied to software development for robust, secure applications</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h3>Rapid Problem Solver</h3>
+                                <p>Proven ability to troubleshoot complex issues across the entire technology stack</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h3>Full-Stack Versatility</h3>
+                                <p>From network configuration to database design to frontend development</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-image">
                     <div class="photo-placeholder">
-                        <!-- Your original photo logic restored -->
                         <img src="IMG_0052.jpg" alt="Vincent Barongo" class="profile-photo">
                     </div>
                 </div>
@@ -641,47 +859,52 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" style="background-color: #f5f5f5;">
+    <section id="skills" style="background-color: #f8f9fa;">
         <div class="container">
             <h2>Technical Skills</h2>
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Networking & Security</h3>
+                    <h3><i class="fas fa-network-wired"></i> Networking & Infrastructure</h3>
                     <ul class="skill-list">
                         <li>Sophos Firewall configuration & management</li>
                         <li>Cisco networking (LAN/WAN, routing & switching)</li>
-                        <li>IP phones & VoIP systems setup</li>
+                        <li>IP phones & VoIP systems implementation</li>
                         <li>VPN setup & secure remote access</li>
-                        <li>Network monitoring & security administration</li>
+                        <li>Network security & monitoring systems</li>
                         <li>CCTV installation & NVR configuration</li>
                         <li>Fiber optic cabling & splicing</li>
                         <li>Starlink internet integration</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Systems Administration & IT Support</h3>
-                    <ul class="skill-list">
-                        <li>Windows & Linux server administration</li>
-                        <li>System installation, configuration & troubleshooting</li>
-                        <li>Hardware & software support</li>
-                        <li>User account management & technical support</li>
-                        <li>IT asset management & documentation</li>
-                        <li>End-user training & support</li>
+                        <li>Windows/Linux server administration</li>
                     </ul>
                 </div>
                 
                 <div class="skill-category">
                     <h3><i class="fas fa-code"></i> Software Development</h3>
                     <ul class="skill-list">
-                        <li>Mobile app development (Java, Flutter, Android Studio)</li>
-                        <li>Web development (PHP, React.js, HTML, CSS, JavaScript)</li>
+                        <li>Mobile app development (Java, Flutter)</li>
+                        <li>Frontend development (React.js, HTML5, CSS3, JavaScript)</li>
+                        <li>Backend development (PHP, Node.js)</li>
                         <li>Database design & management (MySQL, Firebase)</li>
-                        <li>API integration (M-Pesa, Google Maps, Firebase)</li>
-                        <li>Full-stack development for business systems</li>
-                        <li>Version control (Git/GitHub)</li>
-                        <li>AWS (basic solutions architecture)</li>
-                        <li>Docker (basic containerization)</li>
+                        <li>API integration (M-Pesa, Google Maps, payment gateways)</li>
+                        <li>RESTful API development</li>
+                        <li>Version control with Git/GitHub</li>
+                        <li>Basic AWS & Docker</li>
+                        <li>Responsive web design</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> IT Support & Systems</h3>
+                    <ul class="skill-list">
+                        <li>End-to-end IT support & troubleshooting</li>
+                        <li>Hardware/software installation & configuration</li>
+                        <li>System administration & maintenance</li>
+                        <li>User training & technical support</li>
+                        <li>IT asset management</li>
+                        <li>Technical documentation</li>
+                        <li>Process analysis & optimization</li>
+                        <li>Quality assurance testing</li>
+                        <li>Deployment & maintenance</li>
                     </ul>
                 </div>
             </div>
@@ -695,40 +918,45 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <div class="timeline-date">August 2024 - Present</div>
+                        <div class="timeline-date"><i class="far fa-calendar-alt"></i> August 2024 - Present</div>
                         <h3>IT Support & Systems Administrator</h3>
                         <h4>Globenet Technologies</h4>
-                        <ul>
-                            <li>Delivering end-to-end IT support for hardware, software, and networks, achieving 95% issue resolution within SLA</li>
-                            <li>Configuring and managing Sophos firewalls, VPNs, and traffic monitoring, reducing vulnerabilities by 40%</li>
-                            <li>Deploying IP phones and VoIP systems, cutting communication costs by 30%</li>
-                            <li>Ensuring 99.9% uptime for servers, LAN/WAN, and CCTV systems</li>
+                        <ul class="skill-list">
+                            <li>Managed end-to-end IT infrastructure including networks, servers, and security systems</li>
+                            <li>Configured and maintained Sophos firewalls, reducing security vulnerabilities by 40%</li>
+                            <li>Implemented VoIP systems that cut organizational communication costs by 30%</li>
+                            <li>Ensured 99.9% uptime for critical systems through proactive monitoring</li>
+                            <li>Provided comprehensive technical support and user training</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <div class="timeline-date">May 2024 - August 2024</div>
+                        <div class="timeline-date"><i class="far fa-calendar-alt"></i> May 2024 - August 2024</div>
                         <h3>Industrial Attachment</h3>
                         <h4>Globenet Technologies</h4>
-                        <ul>
-                            <li>Assisted in network design, installation, and troubleshooting with senior engineers</li>
-                            <li>Supported firewall configurations, server administration, and CCTV setups</li>
-                            <li>Contributed to software projects using PHP, Java, and Flutter, enhancing application efficiency</li>
-                            <li>Documented IT processes and delivered cybersecurity training</li>
+                        <ul class="skill-list">
+                            <li>Assisted in network design, installation, and troubleshooting</li>
+                            <li>Supported firewall configurations and server administration</li>
+                            <li>Contributed to software projects using PHP, Java, and Flutter</li>
+                            <li>Documented IT processes and assisted with cybersecurity initiatives</li>
+                            <li>Gained hands-on experience with enterprise IT environments</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <div class="timeline-date">2022 - Present</div>
+                        <div class="timeline-date"><i class="far fa-calendar-alt"></i> 2022 - Present</div>
                         <h3>Freelance Software Developer</h3>
-                        <ul>
-                            <li>Designed responsive portfolio and eCommerce websites with React.js, PHP, and MySQL, boosting client sales by 50%</li>
-                            <li>Built a Collateral Loan App with M-Pesa API integration for secure loan processing</li>
-                            <li>Developed an Employee Management and Attendance App using Flutter for cross-platform support</li>
+                        <h4>Various Clients</h4>
+                        <ul class="skill-list">
+                            <li>Developed custom web applications with React.js and PHP</li>
+                            <li>Built mobile applications for Android using Java and Flutter</li>
+                            <li>Created database-driven business solutions with MySQL</li>
+                            <li>Integrated third-party APIs including M-Pesa for payments</li>
+                            <li>Delivered end-to-end projects from concept to deployment</li>
                         </ul>
                     </div>
                 </div>
@@ -737,51 +965,71 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" style="background-color: #f5f5f5;">
+    <section id="projects" style="background-color: #f8f9fa;">
         <div class="container">
-            <h2>Key Projects</h2>
+            <h2>Featured Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-business-time" style="font-size: 3rem;"></i>
+                    <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-utensils"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Employee Management & Attendance App</h3>
-                        <p>A comprehensive employee management and attendance tracking system built with Flutter and Firebase. Features geofencing restrictions, real-time tracking, and admin dashboard.</p>
+                        <h3>Smart Meal Planner</h3>
+                        <p>A comprehensive meal planning application with recipe management, nutritional tracking, and automated grocery lists. Features include user authentication, meal scheduling, and dietary preference customization.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">React.js</span>
                             <span class="project-tag">Firebase</span>
-                            <span class="project-tag">Google Maps</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">REST API</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-money-bill-wave" style="font-size: 3rem;"></i>
+                    <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-business-time"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Collateral Loan App</h3>
-                        <p>An Android app with admin dashboard and M-Pesa integration for secure loan processing. Minimizes loan defaults through automated tracking.</p>
+                        <h3>Employee Management System</h3>
+                        <p>Cross-platform employee management and attendance tracking system with geofencing, real-time tracking, and administrative dashboard. Features secure authentication and comprehensive reporting.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Google Maps API</span>
+                            <span class="project-tag">Dart</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Collateral Loan Management</h3>
+                        <p>Secure loan processing application with M-Pesa integration, admin dashboard, and automated tracking to minimize defaults. Includes borrower management and payment scheduling features.</p>
                         <div class="project-tags">
                             <span class="project-tag">Android</span>
                             <span class="project-tag">Java</span>
                             <span class="project-tag">M-Pesa API</span>
+                            <span class="project-tag">MySQL</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-lock" style="font-size: 3rem;"></i>
+                    <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-lock"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Network Security Implementation</h3>
-                        <p>Implemented Sophos firewalls, VPNs, IP phones, fiber cabling, and Starlink solutions for enhanced organizational security and connectivity.</p>
+                        <h3>Enterprise Network Security</h3>
+                        <p>Comprehensive network security implementation including Sophos firewalls, VPN configurations, IP phone systems, fiber optic infrastructure, and Starlink integration for redundancy.</p>
                         <div class="project-tags">
                             <span class="project-tag">Sophos</span>
+                            <span class="project-tag">Cisco</span>
                             <span class="project-tag">VPN</span>
-                            <span class="project-tag">Starlink</span>
+                            <span class="project-tag">VoIP</span>
                         </div>
                     </div>
                 </div>
@@ -802,6 +1050,7 @@
                         <div>
                             <h3>Email</h3>
                             <p>vbarongo68@gmail.com</p>
+                            <p style="font-size: 0.9rem; color: var(--text-light);">Response within 24 hours</p>
                         </div>
                     </div>
                     
@@ -812,6 +1061,7 @@
                         <div>
                             <h3>Phone</h3>
                             <p>+254-112194631</p>
+                            <p style="font-size: 0.9rem; color: var(--text-light);">Available for calls</p>
                         </div>
                     </div>
                     
@@ -822,6 +1072,18 @@
                         <div>
                             <h3>Location</h3>
                             <p>Nairobi, Kenya</p>
+                            <p style="font-size: 0.9rem; color: var(--text-light);">Open to remote opportunities</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3>Availability</h3>
+                            <p>Open to new opportunities</p>
+                            <p style="font-size: 0.9rem; color: var(--text-light);">Full-time, contract, or freelance</p>
                         </div>
                     </div>
                 </div>
@@ -829,26 +1091,28 @@
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your email" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-control" required>
+                            <input type="text" id="subject" class="form-control" placeholder="How can I help?" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" placeholder="Tell me about your project or opportunity..." required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="btn" style="width: 100%;">
+                            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Message
+                        </button>
                     </form>
                 </div>
             </div>
@@ -860,29 +1124,37 @@
         <div class="container">
             <div class="footer-content">
                 <div class="logo">Vincent<span>Barongo</span></div>
-                <p>IT Specialist | Software Developer</p>
+                <p>IT Infrastructure Specialist | Full-Stack Developer | Technology Solutions Provider</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:vbarongo68@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Vincent Barongo. All rights reserved.</p>
+                <p>&copy; 2025 Vincent Barongo. All rights reserved. | Designed to showcase versatility across IT and development roles</p>
             </div>
         </div>
     </footer>
 
     <script>
         // Mobile menu toggle
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            menuToggle.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
         
         // Close mobile menu when clicking on a link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function() {
-                document.querySelector('nav').classList.remove('active');
+                nav.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
         
@@ -904,20 +1176,94 @@
             });
         });
         
-        // Simple form validation
+        // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
             
             if (name && email && subject && message) {
-                alert('Thank you for your message! I will get back to you soon.');
-                this.reset();
+                // In a real implementation, you would send this data to a server
+                // For now, we'll show a success message
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert(`Thank you, ${name}! Your message has been sent. I'll get back to you at ${email} as soon as possible.`);
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
             }
         });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe timeline items and project cards
+        document.querySelectorAll('.timeline-item, .project-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                return;
+            }
+            
+            if (currentScroll > lastScroll) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.15)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Add subtle floating animation to tech icons
+        const floatingTechs = document.querySelectorAll('.floating-tech');
+        floatingTechs.forEach((tech, index) => {
+            tech.style.animation = `float 6s ease-in-out ${index * 1.5}s infinite`;
+        });
+        
+        // Add the float animation to CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(5deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Update copyright year
+        document.querySelector('.copyright p').innerHTML = document.querySelector('.copyright p').innerHTML.replace('2025', new Date().getFullYear());
     </script>
 </body>
 </html>
